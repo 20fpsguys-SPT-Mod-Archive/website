@@ -41,8 +41,8 @@ window.MODS = [
       "Flea prices, falls back to handbook when flea has nothing"
     ],
     requires: [],
-    download: null,
-    source: null
+    download: "https://github.com/diemitze/LootNet/releases/download/1.1.0/LootNet.zip",
+    source: "https://github.com/diemitze/LootNet"
   },
   {
     id: "weekend-drops",
@@ -113,8 +113,9 @@ window.MODS = [
       "You're holding a knife, not a machine gun, so you should move quicker. Speed is configurable in the F12 menu.",
     features: [],
     requires: [],
+    // latest release is still 1.0.0 (the 4.0 build); link it once 1.0.1 is tagged
     download: null,
-    source: null
+    source: "https://github.com/diemitze/knife-sprint"
   },
   {
     id: "quick-loot",
