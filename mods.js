@@ -22,7 +22,7 @@ window.MODS = [
     ],
     requires: [],
     download: null,
-    source: "https://github.com/diemitze/Parmesan---Partizan-Rework"
+    source: null
   },
   {
     id: "lootnet",
@@ -63,7 +63,7 @@ window.MODS = [
     ],
     requires: [],
     download: null,
-    source: "https://github.com/diemitze/WeekendDrops"
+    source: null
   },
   {
     id: "resound",
@@ -83,7 +83,7 @@ window.MODS = [
     ],
     requires: [],
     download: null,
-    source: "https://github.com/diemitze/resound"
+    source: null
   },
   {
     id: "female-pmc-voice",
@@ -98,7 +98,7 @@ window.MODS = [
     features: [],
     requires: [{ name: "WTT CommonLib", detail: "3.x, server mod and client plugin" }],
     download: null,
-    source: "https://github.com/diemitze/female-pmc-voice-USEC"
+    source: null
   },
   {
     id: "knife-sprint",
@@ -113,8 +113,7 @@ window.MODS = [
       "You're holding a knife, not a machine gun, so you should move quicker. Speed is configurable in the F12 menu.",
     features: [],
     requires: [],
-    // latest release is still 1.0.0 (the 4.0 build); link it once 1.0.1 is tagged
-    download: null,
+    download: "https://github.com/diemitze/knife-sprint/releases/download/1.0.1/KnifeSprint.zip",
     source: "https://github.com/diemitze/knife-sprint"
   },
   {
@@ -138,6 +137,6 @@ window.MODS = [
     ],
     requires: [],
     download: null,
-    source: "https://github.com/diemitze/Quick-Loot"
+    source: null
   }
 ];
