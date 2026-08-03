@@ -22,7 +22,7 @@ window.MODS = [
     ],
     requires: [],
     download: null,
-    source: null
+    source: "https://github.com/diemitze/Parmesan---Partizan-Rework"
   },
   {
     id: "lootnet",
@@ -63,7 +63,7 @@ window.MODS = [
     ],
     requires: [],
     download: null,
-    source: null
+    source: "https://github.com/diemitze/WeekendDrops"
   },
   {
     id: "resound",
@@ -83,7 +83,7 @@ window.MODS = [
     ],
     requires: [],
     download: null,
-    source: null
+    source: "https://github.com/diemitze/resound"
   },
   {
     id: "female-pmc-voice",
@@ -98,7 +98,7 @@ window.MODS = [
     features: [],
     requires: [{ name: "WTT CommonLib", detail: "3.x, server mod and client plugin" }],
     download: null,
-    source: null
+    source: "https://github.com/diemitze/female-pmc-voice-USEC"
   },
   {
     id: "knife-sprint",
@@ -138,6 +138,6 @@ window.MODS = [
     ],
     requires: [],
     download: null,
-    source: null
+    source: "https://github.com/diemitze/Quick-Loot"
   }
 ];
