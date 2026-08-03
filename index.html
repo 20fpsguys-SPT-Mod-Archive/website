@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>20fpsguy's SPT mods</title>
+<meta name="description" content="SPT mods by 20fpsguy, plus an archive of older mods ported to SPT 4.1.">
+<style>
+  :root {
+    --bg: #101215;
+    --panel: #161a1e;
+    --ink: #e8ebee;
+    --dim: #aab3bb;
+    --faint: #7c858d;
+    --rule: #262c32;
+    --accent: #c39a5f;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 18px/1.72 ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--accent); text-underline-offset: 2px; transition: color .15s ease; }
+  a:hover { color: #d3ad72; }
+
+  /* entrance: a short rise, staggered down the list */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(9px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .rise {
+    opacity: 0;
+    animation: rise .42s cubic-bezier(.22, .68, .36, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 55ms);
+  }
+  .mono { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+
+  /* intro */
+  .intro { padding: 72px 0 10px; }
+  h1 { margin: 0 0 18px; font-size: 34px; font-weight: 650; letter-spacing: -0.02em; line-height: 1.25; }
+  .intro p { margin: 0 0 16px; color: var(--dim); max-width: 62ch; }
+  .intro p.lead { color: var(--ink); font-size: 19px; }
+  code {
+    background: var(--panel); border: 1px solid var(--rule);
+    padding: 1px 6px; border-radius: 4px; font-size: 0.86em; color: var(--ink);
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+
+  /* search row */
+  .bar {
+    display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center;
+    padding: 26px 0 6px; margin-top: 26px; border-top: 1px solid var(--rule);
+  }
+  #q {
+    flex: 1 1 200px; min-width: 0;
+    background: transparent; border: 0; border-bottom: 1px solid var(--rule);
+    color: var(--ink); font: inherit; font-size: 16px; padding: 6px 2px;
+  }
+  #q::placeholder { color: var(--faint); }
+  #q:focus { outline: 0; border-bottom-color: var(--accent); }
+  .filters { display: flex; gap: 14px; font-size: 15px; }
+  .chip {
+    background: 0; border: 0; padding: 4px 0; cursor: pointer;
+    color: var(--faint); font: inherit;
+    border-bottom: 1px solid transparent;
+    transition: color .15s ease, border-color .2s ease;
+  }
+  .chip:hover { color: var(--dim); }
+  .chip[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+  #q { transition: border-color .2s ease; }
+
+  /* section headings */
+  .sec { margin-top: 46px; }
+  .sec-head { padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
+  .sec-head h2 {
+    margin: 0; font-size: 14px; font-weight: 600;
+    letter-spacing: 0.11em; text-transform: uppercase; color: var(--accent);
+  }
+  .sec-head p { margin: 10px 0 0; color: var(--dim); font-size: 16px; max-width: 62ch; }
+
+  /* mods */
+  .mod { padding: 36px 0; border-top: 1px solid var(--rule); }
+  .mod:first-child { border-top: 0; }
+  .mod-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px 12px; }
+  .mod h3 { margin: 0; font-size: 24px; font-weight: 650; letter-spacing: -0.015em; }
+  .mod .what { color: var(--dim); font-size: 17px; }
+  .mod .v { margin-left: auto; color: var(--faint); font-size: 14px; white-space: nowrap; }
+  .mod .by { color: var(--faint); font-size: 15px; }
+
+  .mod p.desc { margin: 14px 0 0; max-width: 64ch; }
+  .mod ul { margin: 14px 0 0; padding-left: 22px; color: var(--dim); max-width: 62ch; }
+  .mod li { margin: 5px 0; padding-left: 2px; }
+  .mod li::marker { color: var(--faint); }
+  .mod .needs { margin: 14px 0 0; font-size: 16px; color: var(--dim); }
+  .mod .needs b { color: var(--ink); font-weight: 600; }
+
+  .flag {
+    margin: 16px 0 0; padding: 12px 15px; font-size: 16px; max-width: 64ch;
+    border-left: 3px solid #97742d; background: #1e1a11; color: #e3c07e;
+    border-radius: 0 5px 5px 0;
+  }
+  .flag b { color: #f5cf85; }
+
+  .links { margin-top: 18px; display: flex; gap: 20px; align-items: center; font-size: 16px; }
+  .links .soon { color: var(--faint); }
+  .links a::after {
+    content: " \2192";
+    display: inline-block;
+    transition: transform .18s ease;
+  }
+  .links a:hover::after { transform: translateX(3px); }
+
+  /* empty archive */
+  .waiting {
+    margin: 24px 0 0; padding: 26px 24px;
+    border: 1px dashed var(--rule); border-radius: 8px;
+    color: var(--dim);
+  }
+  .waiting p { margin: 0 0 14px; max-width: 62ch; }
+  .waiting p:last-child { margin-bottom: 0; }
+
+  /* takedown */
+  .policy {
+    margin: 46px 0 0; padding: 30px 28px;
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 8px;
+  }
+  .policy h2 { margin: 0 0 16px; font-size: 22px; font-weight: 650; letter-spacing: -0.01em; }
+  .policy p { margin: 0 0 16px; color: var(--dim); max-width: 62ch; }
+  .policy p:last-child { margin-bottom: 0; }
+  .policy strong { color: var(--ink); font-weight: 600; }
+
+  footer { padding: 44px 0 80px; color: var(--faint); font-size: 15px; }
+  footer p { margin: 0 0 7px; }
+
+  .none { color: var(--faint); padding: 30px 0; }
+
+  @media (max-width: 520px) {
+    body { font-size: 17px; }
+    .intro { padding-top: 48px; }
+    h1 { font-size: 28px; }
+    .mod .v { margin-left: 0; width: 100%; }
+    .policy, .waiting { padding: 24px 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise { opacity: 1; animation: none; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<main class="wrap">
+
+  <section class="intro">
+    <h1 class="rise" style="--i:0">20fpsguy's SPT mods</h1>
+    <p class="lead rise" style="--i:1">
+      Mods I've made for SPT, plus an archive of older mods I've ported forward so they
+      don't disappear. Everything here is built and tested against SPT 4.1.
+    </p>
+    <p class="rise" style="--i:2">
+      Client plugins go in <code>BepInEx/plugins</code>, server mods go in
+      <code>SPT_Runtime/user/mods</code>. Sources on
+      <a href="https://github.com/20fpsguys-SPT-Mod-Archive">GitHub</a>.
+    </p>
+  </section>
+
+  <div class="bar rise" style="--i:3">
+    <input type="search" id="q" placeholder="Filter..." aria-label="Filter mods">
+    <div class="filters" id="filters">
+      <button class="chip" data-f="all" aria-pressed="true">all</button>
+      <button class="chip" data-f="client" aria-pressed="false">client</button>
+      <button class="chip" data-f="server" aria-pressed="false">server</button>
+    </div>
+  </div>
+
+  <section class="sec" id="sec-mine">
+    <div class="sec-head">
+      <h2>My mods</h2>
+      <p>Stuff I wrote. All MIT, do what you like with it.</p>
+    </div>
+    <div id="list-mine"></div>
+  </section>
+
+  <section class="sec" id="sec-archive">
+    <div class="sec-head">
+      <h2>Archive</h2>
+      <p>
+        Mods that never got updated to 4.1 and have been abandoned by their authors. I
+        port them forward so they still work. Credit stays with whoever wrote them.
+      </p>
+    </div>
+    <div id="list-archive"></div>
+  </section>
+
+  <section class="policy" id="takedown">
+    <h2>Is a mod of yours listed here?</h2>
+    <p>
+      The only reason any of this is up is to keep these mods alive and available. SPT is
+      shutting down, mods get taken offline, authors move on, and once a mod is gone it's
+      gone for good. I'd rather people could still play with the stuff everyone spent
+      years building.
+    </p>
+    <p>
+      But it's your work. If you own a mod listed here and you want it taken down,
+      <strong><a href="https://github.com/20fpsguys-SPT-Mod-Archive/website/issues/new?labels=takedown&amp;template=takedown.yml">open a complaint here</a></strong>
+      and I'll remove it as soon as I can. That's your right and I'm not going to argue
+      about it or ask you to justify anything.
+    </p>
+    <p>
+      Same if you just want something changed instead: credit fixed, description
+      corrected, a link pointed at your page rather than mine. Prefer to keep it off a
+      public issue? Say so in it and I'll follow up privately.
+    </p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p>Not affiliated with Battlestate Games or the SPT team.</p>
+</footer>
+
+<script src="mods.js"></script>
+<script>
+(function () {
+  var mods = window.MODS || [];
+  var q = document.getElementById('q');
+  var filter = 'all';
+
+  var groups = [
+    { key: 'mine',    list: document.getElementById('list-mine'),    sec: document.getElementById('sec-mine') },
+    { key: 'archive', list: document.getElementById('list-archive'), sec: document.getElementById('sec-archive') }
+  ];
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function row(m) {
+    var el = document.createElement('article');
+    el.className = 'mod';
+
+    var by = m.author ? '<span class="by">by ' + esc(m.author) + '</span>' : '';
+
+    var feats = (m.features && m.features.length)
+      ? '<ul>' + m.features.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul>'
+      : '';
+
+    var needs = (m.requires && m.requires.length)
+      ? '<p class="needs">Needs ' + m.requires.map(function (r) {
+          return '<b>' + esc(r.name) + '</b>' + (r.detail ? ' (' + esc(r.detail) + ')' : '');
+        }).join(' and ') + '</p>'
+      : '';
+
+    var flag = m.statusNote
+      ? '<p class="flag"><b>' + (m.status === 'issue' ? 'Broken.' : 'Unfinished.') + '</b> ' +
+        esc(m.statusNote) + '</p>'
+      : '';
+
+    var links = [];
+    links.push(m.download
+      ? '<a href="' + esc(m.download) + '">Download</a>'
+      : '<span class="soon">No build up yet</span>');
+    if (m.source) links.push('<a href="' + esc(m.source) + '">Source</a>');
+    if (m.original) links.push('<a href="' + esc(m.original) + '">Original</a>');
+
+    el.innerHTML =
+      '<div class="mod-top">' +
+        '<h3>' + esc(m.name) + '</h3>' +
+        '<span class="what">' + esc(m.tagline) + '</span>' +
+        '<span class="v mono">' + esc(m.version) + ' &middot; ' + m.side.join(' + ') + '</span>' +
+      '</div>' +
+      (by ? '<p class="needs">' + by + '</p>' : '') +
+      '<p class="desc">' + esc(m.blurb) + '</p>' +
+      feats + needs + flag +
+      '<div class="links">' + links.join('') + '</div>';
+
+    return el;
+  }
+
+  function matches(m) {
+    if (filter !== 'all' && m.side.indexOf(filter) === -1) return false;
+    var t = q.value.trim().toLowerCase();
+    if (!t) return true;
+    return [m.name, m.tagline, m.blurb, m.author || '']
+      .concat(m.features || []).join(' ').toLowerCase().indexOf(t) !== -1;
+  }
+
+  function render(animate) {
+    var searching = q.value.trim() !== '' || filter !== 'all';
+    var n = 0;
+
+    groups.forEach(function (g) {
+      var all = mods.filter(function (m) { return (m.group || 'mine') === g.key; });
+      var shown = all.filter(matches);
+      g.list.innerHTML = '';
+
+      if (shown.length) {
+        shown.forEach(function (m) {
+          var el = row(m);
+          if (animate) {
+            el.classList.add('rise');
+            el.style.setProperty('--i', n++);
+          }
+          g.list.appendChild(el);
+        });
+        g.sec.hidden = false;
+        return;
+      }
+
+      // nothing to show: hide the section while filtering, otherwise explain why
+      if (searching) {
+        g.sec.hidden = true;
+        return;
+      }
+      g.sec.hidden = false;
+      g.list.innerHTML = g.key === 'archive'
+        ? '<div class="waiting">' +
+            '<p>Nothing here yet. This is where mods end up that never got updated to ' +
+            '4.1 and have been abandoned, either because the author stopped modding or ' +
+            'took the mod down.</p>' +
+            '<p>I wait a few weeks before adding anything, in case the author comes ' +
+            'back to it.</p>' +
+          '</div>'
+        : '<p class="none">Nothing here yet.</p>';
+    });
+
+    var anyShown = groups.some(function (g) { return !g.sec.hidden; });
+    if (!anyShown) {
+      groups[0].sec.hidden = false;
+      groups[0].list.innerHTML = '<p class="none">Nothing matches that.</p>';
+    }
+  }
+
+  // typing re-renders without animating, otherwise the list flickers per keystroke
+  // Never let content stay hidden behind an animation that did not run (background tab,
+  // animations disabled, older browser). Dropping .rise restores the default opacity.
+  function settle() {
+    Array.prototype.forEach.call(document.querySelectorAll('.rise'), function (el) {
+      el.classList.remove('rise');
+      el.style.removeProperty('--i');
+    });
+  }
+  var settleTimer;
+  function scheduleSettle() {
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(settle, 1400);
+  }
+  document.addEventListener('animationend', function (e) {
+    if (e.animationName === 'rise') {
+      e.target.classList.remove('rise');
+      e.target.style.removeProperty('--i');
+    }
+  });
+
+  q.addEventListener('input', function () { render(false); });
+
+  document.getElementById('filters').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip');
+    if (!b || b.getAttribute('aria-pressed') === 'true') return;
+    filter = b.dataset.f;
+    Array.prototype.forEach.call(this.querySelectorAll('.chip'), function (c) {
+      c.setAttribute('aria-pressed', String(c === b));
+    });
+    render(true);
+    scheduleSettle();
+  });
+
+  render(true);
+  scheduleSettle();
+})();
+</script>
+
+</body>
+</html>

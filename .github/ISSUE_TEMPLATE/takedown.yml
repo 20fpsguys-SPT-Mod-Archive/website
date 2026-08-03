@@ -1,0 +1,61 @@
+name: Takedown request
+description: Ask for a mod of yours to be removed or changed
+title: "[takedown] "
+labels: ["takedown"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If a mod you wrote is on the site and you want it gone, this is the place.
+        I'll take it down, no argument and no questions about licensing.
+
+        If you'd rather not do this in public, say so below and I'll follow up privately.
+
+  - type: input
+    id: mod
+    attributes:
+      label: Which mod
+      placeholder: Name as it appears on the site
+    validations:
+      required: true
+
+  - type: dropdown
+    id: what
+    attributes:
+      label: What do you want done
+      options:
+        - Remove it completely
+        - Remove the download, keep the listing
+        - Fix the credit or author name
+        - Change the description
+        - Point the link somewhere else
+        - Something else (explain below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: detail
+    attributes:
+      label: Anything else
+      placeholder: Optional. If you picked "something else", explain here.
+    validations:
+      required: false
+
+  - type: input
+    id: proof
+    attributes:
+      label: How can I tell it's you
+      description: >
+        Only so I don't remove someone's work on a stranger's say-so. A link to the
+        account that published it, the repo, or the Forge page is plenty.
+      placeholder: e.g. link to your Forge profile or the original repo
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: private
+    attributes:
+      label: Privacy
+      options:
+        - label: I'd rather handle this privately, contact me instead of replying here
+          required: false
