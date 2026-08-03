@@ -105,6 +105,11 @@
     border-radius: 0 5px 5px 0;
   }
   .flag b { color: #f5cf85; }
+  /* "not out yet" is not a problem, so it should not look like one */
+  .flag.info {
+    border-left-color: #3c464f; background: #171b1f; color: var(--dim);
+  }
+  .flag.info b { color: var(--ink); }
 
   .links { margin-top: 18px; display: flex; gap: 20px; align-items: center; font-size: 16px; }
   .links .soon { color: var(--faint); }
@@ -259,9 +264,14 @@
         }).join(' and ') + '</p>'
       : '';
 
+    var LABELS = {
+      issue:   'Semi broken.',
+      wip:     'Work in progress.',
+      pending: 'Not released yet.'
+    };
     var flag = m.statusNote
-      ? '<p class="flag"><b>' + (m.status === 'issue' ? 'Broken.' : 'Unfinished.') + '</b> ' +
-        esc(m.statusNote) + '</p>'
+      ? '<p class="flag' + (m.status === 'pending' ? ' info' : '') + '">' +
+        '<b>' + (LABELS[m.status] || 'Heads up.') + '</b> ' + esc(m.statusNote) + '</p>'
       : '';
 
     var links = [];

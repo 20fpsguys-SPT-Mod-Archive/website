@@ -12,7 +12,9 @@ window.MODS = [
     version: "1.0.1",
     spt: "4.1",
     side: ["client"],
-    status: "ok",
+    status: "pending",
+    statusNote:
+      "Ported to 4.1 and building fine, I just have not put the release up yet.",
     blurb:
       "Partizan is hardcoded to hunt you. He knows where you are at all times and comes for you every raid, wherever you spawn. This points him at the AI PMCs instead, so he roams and picks fights with them. He'll still shoot you if he actually sees you.",
     features: [
@@ -52,7 +54,9 @@ window.MODS = [
     version: "1.0.4",
     spt: "4.1",
     side: ["client", "server"],
-    status: "ok",
+    status: "pending",
+    statusNote:
+      "4.1 build is done but not released. The contract hold-zone brain needs BigBrain, which has no 4.1 build yet, so that part stays off until it does.",
     blurb:
       "A new set of challenges every weekend. Finish them to fill three reward tiers and get crates mailed to you. Dailies pay GP coins, which you spend in a shop for cases and Arena crates.",
     features: [
@@ -73,7 +77,8 @@ window.MODS = [
     version: "1.1.1",
     spt: "4.1",
     side: ["client"],
-    status: "ok",
+    status: "pending",
+    statusNote: "Ported to 4.1, release is not up yet.",
     blurb:
       "Swaps weapon fire audio. Ships with Black Ops II for most guns and CS2 for the Deagles, but it just reads WAVs out of folders, so you can build your own pack for anything.",
     features: [
@@ -93,7 +98,8 @@ window.MODS = [
     version: "1.0.3",
     spt: "4.1",
     side: ["server"],
-    status: "ok",
+    status: "pending",
+    statusNote: "Ported to 4.1, release is not up yet.",
     blurb: "Adds a female PMC voice with a full line set.",
     features: [],
     requires: [{ name: "WTT CommonLib", detail: "3.x, server mod and client plugin" }],
@@ -126,7 +132,7 @@ window.MODS = [
     side: ["client", "server"],
     status: "issue",
     statusNote:
-      "Broken on 4.1 right now. It loads fine but the patches don't bind, so auto-search and quick-loot just do nothing. I'm fixing it, don't bother downloading yet.",
+      "Semi broken on 4.1. It loads and all the config is there, but auto-search and quick-loot do not actually fire. Needs some work before it is worth downloading.",
     blurb:
       "Opens containers and pulls out what matches your rules, so you're not clicking through every crate.",
     features: [
