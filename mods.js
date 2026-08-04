@@ -98,13 +98,12 @@ window.MODS = [
     version: "1.0.3",
     spt: "4.1",
     side: ["server"],
-    status: "pending",
-    statusNote: "Ported to 4.1, release is not up yet.",
+    status: "ok",
     blurb: "Adds a female PMC voice with a full line set.",
     features: [],
     requires: [{ name: "WTT CommonLib", detail: "3.x, server mod and client plugin" }],
-    download: null,
-    source: null
+    download: "https://github.com/diemitze/female-pmc-voice-USEC/releases/download/1.0.3/FemalePMCVoice_v1.0.3.zip",
+    source: "https://github.com/diemitze/female-pmc-voice-USEC"
   },
   {
     id: "knife-sprint",
@@ -116,7 +115,7 @@ window.MODS = [
     side: ["client"],
     status: "ok",
     blurb:
-      "You're holding a knife, not a machine gun, so you should move quicker. Speed is configurable in the F12 menu.",
+      "everyone runs faster with a knife!. Speed is configurable in the F12 menu.",
     features: [],
     requires: [],
     download: "https://github.com/diemitze/knife-sprint/releases/download/1.0.1/KnifeSprint.zip",
