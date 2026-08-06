@@ -14,7 +14,7 @@ window.MODS = [
     side: ["client"],
     status: "pending",
     statusNote:
-      "Ported to 4.1 and building fine, I just have not put the release up yet.",
+      "Ported to 4.1 and building fine, I just have not put the release up yet still testing for possible bugs or issues.",
     blurb:
       "Partizan is hardcoded to hunt you. He knows where you are at all times and comes for you every raid, wherever you spawn. This points him at the AI PMCs instead, so he roams and picks fights with them. He'll still shoot you if he actually sees you.",
     features: [
@@ -56,7 +56,7 @@ window.MODS = [
     side: ["client", "server"],
     status: "pending",
     statusNote:
-      "4.1 build is done but not released. The contract hold-zone brain needs BigBrain, which has no 4.1 build yet, so that part stays off until it does.",
+      "4.1 build is done but not released. working on a update and adding new stuff plus i need time to test everything no ETA for a release.",
     blurb:
       "A new set of challenges every weekend. Finish them to fill three reward tiers and get crates mailed to you. Dailies pay GP coins, which you spend in a shop for cases and Arena crates.",
     features: [
@@ -78,7 +78,7 @@ window.MODS = [
     spt: "4.1",
     side: ["client"],
     status: "pending",
-    statusNote: "Ported to 4.1, release is not up yet.",
+    statusNote: "Ported to 4.1, release is not up yet testing some stuff and looking to improve and make adding sounds possible esier.",
     blurb:
       "Swaps weapon fire audio. Ships with Black Ops II for most guns and CS2 for the Deagles, but it just reads WAVs out of folders, so you can build your own pack for anything.",
     features: [
@@ -131,7 +131,7 @@ window.MODS = [
     side: ["client", "server"],
     status: "issue",
     statusNote:
-      "Semi broken on 4.1. It loads and all the config is there, but auto-search and quick-loot do not actually fire. Needs some work before it is worth downloading.",
+      "Semi broken on 4.1. working on a full rework and improve the Quick loot behavor etc.",
     blurb:
       "Opens containers and pulls out what matches your rules, so you're not clicking through every crate.",
     features: [
