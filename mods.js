@@ -121,6 +121,22 @@ window.MODS = [
     download: "https://github.com/diemitze/knife-sprint/releases/download/1.0.1/KnifeSprint.zip",
     source: "https://github.com/diemitze/knife-sprint"
   },
+    {
+    id: "no name yet",
+    group: "mine",
+    name: "no name yet",
+    tagline: "a mod makeing bots roam in raids",
+    version: "",
+    spt: "4.1",
+    side: ["client"],
+    status: "ok",
+    blurb:
+      "a mod makeing bots roam around the map and run to POIs",
+    features: [],
+    requires: [],
+    download: "",
+    source: ""
+  },
   {
     id: "quick-loot",
     group: "mine",
