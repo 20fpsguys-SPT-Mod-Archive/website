@@ -13,8 +13,6 @@ window.MODS = [
     spt: "4.1",
     side: ["client"],
     status: "pending",
-    statusNote:
-      "Ported to 4.1 and building fine, I just have not put the release up yet still testing for possible bugs or issues.",
     blurb:
       "Partizan is hardcoded to hunt you. He knows where you are at all times and comes for you every raid, wherever you spawn. This points him at the AI PMCs instead, so he roams and picks fights with them. He'll still shoot you if he actually sees you.",
     features: [
@@ -23,8 +21,8 @@ window.MODS = [
       "Optional: roams faster, and plants the grenades he already carries"
     ],
     requires: [],
-    download: null,
-    source: null
+    download: "https://github.com/diemitze/Parmesan---Partizan-Rework/releases/download/1.0.1/Parmesan.zip",
+    source: "https://github.com/diemitze/Parmesan---Partizan-Rework"
   },
   {
     id: "lootnet",
