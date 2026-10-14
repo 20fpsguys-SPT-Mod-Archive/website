@@ -163,19 +163,20 @@ window.MODS = [
   {
     id: "breakout-outlines",
     img: "img/breakout-outlines.png",
-    author: "harmony",
+    author: "20fpsguy, maintained by harmony",
     name: "Breakout Outlines",
     tagline: "Arena Breakout style loot outlines",
     version: "1.2.0",
     spt: "4.1.6",
     side: ["client"],
     status: "pending",
-    statusNote: "Newest is 1.2.0 on Forge. The backup download here is still the original 1.0.0.",
+    statusNote: "harmony maintains this now. Grab the current version from their Forge page, my old build is not hosted here anymore.",
     blurb:
-      "Draws Arena Breakout Infinite style outlines around containers, loose loot and bodies so they're easier to spot. Made by harmony, co-developed with me.",
+      "Draws Arena Breakout Infinite style outlines around containers, loose loot and bodies so they're easier to spot. I made it, harmony took it over and keeps it updated.",
     features: [],
     requires: [],
-    download: "https://github.com/diemitze/loot-outline/releases/download/1.0.0/LootOutline.zip",
+    download: null,
+    noDownload: "Maintained by harmony",
     source: "https://github.com/diemitze/loot-outline"
   },
   {

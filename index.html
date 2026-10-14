@@ -263,7 +263,7 @@
 
     var dl = m.download
       ? '<a class="dl" href="' + esc(m.download) + '">' + ICON + 'Download</a>'
-      : '<span class="dl none">No build yet</span>';
+      : '<span class="dl none">' + esc(m.noDownload || 'No build yet') + '</span>';
 
     var flag = m.statusNote
       ? '<p class="flag' + (m.status === 'pending' ? ' info' : '') + '"><b>' +
