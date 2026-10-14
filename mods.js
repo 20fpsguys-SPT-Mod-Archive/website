@@ -53,8 +53,8 @@ window.MODS = [
     version: "1.0.7",
     spt: "4.1.6",
     side: ["client", "server"],
-    status: "pending",
-    statusNote: "4.1 is in Beta right now",
+    status: "issue",
+    statusNote: "In a rough state right now. A big update is planned, until then expect bugs.",
     blurb:
       "A new set of challenges every weekend. Finish them to fill three reward tiers and get crates mailed to you. Dailies pay GP coins, which you spend in a shop for cases and Arena crates.",
     features: [
