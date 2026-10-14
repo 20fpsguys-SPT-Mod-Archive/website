@@ -54,7 +54,7 @@ window.MODS = [
     spt: "4.1.6",
     side: ["client", "server"],
     status: "issue",
-    statusNote: "In a rough state right now. A big update is planned, until then expect bugs.",
+    statusNote: "In a rough state right now. A big update is planned, no download until then.",
     blurb:
       "A new set of challenges every weekend. Finish them to fill three reward tiers and get crates mailed to you. Dailies pay GP coins, which you spend in a shop for cases and Arena crates.",
     features: [
@@ -64,7 +64,7 @@ window.MODS = [
       "Kills still count if you die, but banked survival time resets to zero"
     ],
     requires: [],
-    download: "https://github.com/diemitze/WeekendDrops/releases/download/1.0.7/WeekendDrops-1.0.7.zip",
+    download: null,
     source: "https://github.com/diemitze/WeekendDrops"
   },
   {
