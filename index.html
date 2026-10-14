@@ -245,10 +245,11 @@
     el.className = 'mod';
     el.id = m.id;
 
-    var tags = '<span class="tag spt mono">v' + esc(m.version) + '</span>' +
+    var tags = (m.version ? '<span class="tag spt mono">v' + esc(m.version) + '</span>' : '') +
       '<span class="tag' + (m.spt === '4.1' ? '' : ' old') + '">SPT ' + esc(m.spt) + '</span>' +
       m.side.map(function (s) { return '<span class="tag">' + esc(s) + '</span>'; }).join('') +
-      (m.status === 'issue' ? '<span class="tag bad">semi broken</span>' : '');
+      (m.status === 'issue' ? '<span class="tag bad">semi broken</span>' : '') +
+      (m.status === 'wip' ? '<span class="tag">in progress</span>' : '');
 
     var dl = m.download
       ? '<a class="dl" href="' + esc(m.download) + '">' + ICON + 'Download</a>'

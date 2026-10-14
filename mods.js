@@ -51,7 +51,8 @@ window.MODS = [
     version: "1.0.7",
     spt: "4.1",
     side: ["client", "server"],
-    status: "ok",
+    status: "pending",
+    statusNote: "4.1 is in Beta right now",
     blurb:
       "A new set of challenges every weekend. Finish them to fill three reward tiers and get crates mailed to you. Dailies pay GP coins, which you spend in a shop for cases and Arena crates.",
     features: [
@@ -146,7 +147,7 @@ window.MODS = [
     side: ["client"],
     status: "ok",
     blurb:
-      "You're holding a knife, not a machine gun, so you should move quicker. Speed is configurable in the F12 menu.",
+      "everyone runs faster with a knife!. Speed is configurable in the F12 menu.",
     features: [],
     requires: [],
     download: "https://github.com/diemitze/knife-sprint/releases/download/1.0.1/KnifeSprint.zip",
@@ -184,6 +185,20 @@ window.MODS = [
     source: "https://github.com/diemitze/Sixth-Sense-addon"
   },
   {
+    id: "bot-roaming",
+    name: "no name yet",
+    tagline: "a mod makeing bots roam in raids",
+    version: "",
+    spt: "4.1",
+    side: ["client"],
+    status: "wip",
+    blurb: "a mod makeing bots roam around the map and run to POIs",
+    features: [],
+    requires: [],
+    download: null,
+    source: null
+  },
+  {
     id: "quick-loot",
     name: "Quick Loot",
     tagline: "Grabs the stuff you care about",
@@ -192,7 +207,7 @@ window.MODS = [
     side: ["client", "server"],
     status: "issue",
     statusNote:
-      "Semi broken on 4.1. It loads and all the config is there, but auto-search and quick-loot do not actually fire. No download until that's fixed.",
+      "Semi broken on 4.1. working on a full rework and improve the Quick loot behavor etc.",
     blurb:
       "Opens containers and pulls out what matches your rules, so you're not clicking through every crate.",
     features: [
