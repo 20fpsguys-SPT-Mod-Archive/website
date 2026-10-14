@@ -169,15 +169,13 @@ window.MODS = [
     version: "1.2.0",
     spt: "4.1.6",
     side: ["client"],
-    status: "pending",
-    statusNote: "harmony maintains this now. Grab the current version from their Forge page, my old build is not hosted here anymore.",
+    status: "ok",
     blurb:
       "Draws Arena Breakout Infinite style outlines around containers, loose loot and bodies so they're easier to spot. I made it, harmony took it over and keeps it updated.",
     features: [],
     requires: [],
-    download: null,
-    noDownload: "Maintained by harmony",
-    source: "https://github.com/diemitze/loot-outline"
+    download: "https://github.com/harmonyzt/BreakoutOutline/releases/download/1.2.0/Breakout_Outlines_v1.2.0.7z",
+    source: "https://github.com/harmonyzt/BreakoutOutline"
   },
   {
     id: "sixth-sense-isac",
