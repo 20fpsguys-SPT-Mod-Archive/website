@@ -7,10 +7,11 @@
 window.MODS = [
   {
     id: "backpack-gun-slot",
+    img: "img/backpack-gun-slot.png",
     name: "Backpack Gun Slot",
     tagline: "Strap a gun to your backpack",
     version: "1.0.1",
-    spt: "4.1",
+    spt: "4.1.6",
     side: ["client", "server"],
     status: "ok",
     blurb:
@@ -27,10 +28,11 @@ window.MODS = [
   },
   {
     id: "lootnet",
+    img: "img/lootnet.png",
     name: "LootNET",
     tagline: "What did I actually make that raid",
     version: "1.2.0",
-    spt: "4.1",
+    spt: "4.1.6",
     side: ["client", "server"],
     status: "ok",
     blurb:
@@ -49,7 +51,7 @@ window.MODS = [
     name: "Weekend Drops",
     tagline: "Challenges and crates on a weekly cycle",
     version: "1.0.7",
-    spt: "4.1",
+    spt: "4.1.6",
     side: ["client", "server"],
     status: "pending",
     statusNote: "4.1 is in Beta right now",
@@ -67,10 +69,11 @@ window.MODS = [
   },
   {
     id: "resound",
+    img: "img/resound.png",
     name: "Resound",
     tagline: "Different gun sounds",
     version: "1.2.0",
-    spt: "4.1",
+    spt: "4.1.6",
     side: ["client"],
     status: "ok",
     blurb:
@@ -86,10 +89,11 @@ window.MODS = [
   },
   {
     id: "mia-lounge",
+    img: "img/mia-lounge.png",
     name: "MIA Lounge",
     tagline: "Minigames for when you're dead",
     version: "1.0.0",
-    spt: "4.1",
+    spt: "4.1.3",
     side: ["server"],
     status: "ok",
     blurb:
@@ -107,10 +111,11 @@ window.MODS = [
   },
   {
     id: "female-pmc-voice",
-    name: "Female PMC Voice",
+    img: "img/female-pmc-voice.png",
+    name: "Female PMC Voice (USEC)",
     tagline: "Extra voice option",
     version: "1.0.5",
-    spt: "4.1",
+    spt: "4.1.6",
     side: ["server"],
     status: "ok",
     blurb: "Adds a female PMC voice with a full line set.",
@@ -121,10 +126,11 @@ window.MODS = [
   },
   {
     id: "parmesan",
+    img: "img/parmesan.png",
     name: "Parmesan",
     tagline: "Partizan rework",
     version: "1.0.1",
-    spt: "4.1",
+    spt: "4.1.2",
     side: ["client"],
     status: "ok",
     blurb:
@@ -140,10 +146,11 @@ window.MODS = [
   },
   {
     id: "knife-sprint",
+    img: "img/knife-sprint.png",
     name: "Knife Sprint",
     tagline: "Run faster with a knife out",
     version: "1.0.1",
-    spt: "4.1",
+    spt: "4.1.6",
     side: ["client"],
     status: "ok",
     blurb:
@@ -155,15 +162,17 @@ window.MODS = [
   },
   {
     id: "breakout-outlines",
+    img: "img/breakout-outlines.png",
+    author: "harmony",
     name: "Breakout Outlines",
     tagline: "Arena Breakout style loot outlines",
-    version: "1.0.0",
-    spt: "4.0",
+    version: "1.2.0",
+    spt: "4.1.6",
     side: ["client"],
     status: "pending",
-    statusNote: "The build here is the original 1.0.0 from before 4.1.",
+    statusNote: "Newest is 1.2.0 on Forge. The backup download here is still the original 1.0.0.",
     blurb:
-      "Draws Arena Breakout Infinite style outlines around containers, loose loot and bodies so they're easier to spot. Made together with harmony.",
+      "Draws Arena Breakout Infinite style outlines around containers, loose loot and bodies so they're easier to spot. Made by harmony, co-developed with me.",
     features: [],
     requires: [],
     download: "https://github.com/diemitze/loot-outline/releases/download/1.0.0/LootOutline.zip",
@@ -202,8 +211,8 @@ window.MODS = [
     id: "quick-loot",
     name: "Quick Loot",
     tagline: "Grabs the stuff you care about",
-    version: "1.0.7",
-    spt: "4.1",
+    version: "1.0.6",
+    spt: "4.0.13",
     side: ["client", "server"],
     status: "issue",
     statusNote:

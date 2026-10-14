@@ -102,6 +102,15 @@
   .mod-head { display: flex; align-items: center; gap: 16px; padding: 18px 20px; }
   .mod-id { flex: 1 1 auto; min-width: 0; }
   .mod h2 { margin: 0; font-size: 20px; font-weight: 650; letter-spacing: -0.01em; line-height: 1.3; }
+  .thumb {
+    flex: 0 0 auto; width: 64px; height: 64px; border-radius: 8px;
+    object-fit: cover; background: var(--panel-hi);
+  }
+  .thumb.blank {
+    display: grid; place-items: center; border: 1px solid var(--rule);
+    color: var(--faint); font-weight: 650; font-size: 18px; letter-spacing: .04em;
+  }
+  .mod .by { font-size: 14px; font-weight: 400; color: var(--faint); letter-spacing: 0; }
   .mod .what { margin: 2px 0 0; color: var(--dim); font-size: 15px; }
   .meta { margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 6px; font-size: 12.5px; }
   .tag {
@@ -169,8 +178,9 @@
     .intro { padding-top: 44px; }
     h1 { font-size: 29px; }
     .wrap { padding: 0 16px; }
-    .mod-head { flex-direction: column; align-items: stretch; gap: 14px; padding: 16px; }
-    .dl { justify-content: center; }
+    .mod-head { flex-wrap: wrap; gap: 14px; padding: 16px; }
+    .mod-id { flex-basis: calc(100% - 78px); }
+    .dl { flex-basis: 100%; justify-content: center; }
     summary { padding: 9px 16px; }
     .body { padding: 2px 16px 18px; }
     .flag { margin: 0 16px 14px; }
@@ -246,7 +256,7 @@
     el.id = m.id;
 
     var tags = (m.version ? '<span class="tag spt mono">v' + esc(m.version) + '</span>' : '') +
-      '<span class="tag' + (m.spt === '4.1' ? '' : ' old') + '">SPT ' + esc(m.spt) + '</span>' +
+      '<span class="tag' + (m.spt.indexOf('4.1') === 0 ? '' : ' old') + '">SPT ' + esc(m.spt) + '</span>' +
       m.side.map(function (s) { return '<span class="tag">' + esc(s) + '</span>'; }).join('') +
       (m.status === 'issue' ? '<span class="tag bad">semi broken</span>' : '') +
       (m.status === 'wip' ? '<span class="tag">in progress</span>' : '');
@@ -276,10 +286,17 @@
     if (m.source) links.push('<a href="' + esc(m.source) + '">Source</a>');
     if (m.source && m.download) links.push('<a href="' + esc(m.source) + '/releases">All versions</a>');
 
+    // mods without a thumbnail get their initials so the column still lines up
+    var thumb = m.img
+      ? '<img class="thumb" src="' + esc(m.img) + '" alt="" width="64" height="64" loading="lazy">'
+      : '<span class="thumb blank" aria-hidden="true">' +
+        esc(m.name.split(/\s+/).map(function (w) { return w[0]; }).join('').slice(0, 2).toUpperCase()) +
+        '</span>';
+
     el.innerHTML =
-      '<div class="mod-head">' +
+      '<div class="mod-head">' + thumb +
         '<div class="mod-id">' +
-          '<h2>' + esc(m.name) + '</h2>' +
+          '<h2>' + esc(m.name) + (m.author ? ' <span class="by">by ' + esc(m.author) + '</span>' : '') + '</h2>' +
           '<p class="what">' + esc(m.tagline) + '</p>' +
           '<div class="meta">' + tags + '</div>' +
         '</div>' + dl +
