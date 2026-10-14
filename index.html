@@ -4,16 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>20fpsguy's SPT mods</title>
-<meta name="description" content="SPT mods by 20fpsguy, plus an archive of older mods ported to SPT 4.1.">
+<meta name="description" content="SPT mods by 20fpsguy. Direct downloads, no account needed.">
 <style>
   :root {
-    --bg: #101215;
-    --panel: #161a1e;
+    --bg: #0f1113;
+    --panel: #15191d;
+    --panel-hi: #1a1f24;
     --ink: #e8ebee;
     --dim: #aab3bb;
     --faint: #7c858d;
-    --rule: #262c32;
+    --rule: #252b31;
     --accent: #c39a5f;
+    --accent-hi: #d6b077;
+    --ok: #7fae7a;
+    --warn: #e3c07e;
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
@@ -21,135 +25,156 @@
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font: 18px/1.72 ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+    font: 17px/1.65 ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
-  a { color: var(--accent); text-underline-offset: 2px; transition: color .15s ease; }
-  a:hover { color: #d3ad72; }
-
-  /* entrance: a short rise, staggered down the list */
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(9px); }
-    to   { opacity: 1; transform: none; }
-  }
-  .rise {
-    opacity: 0;
-    animation: rise .42s cubic-bezier(.22, .68, .36, 1) forwards;
-    animation-delay: calc(var(--i, 0) * 55ms);
-  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:hover { color: var(--accent-hi); }
   .mono { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
-
-  /* intro */
-  .intro { padding: 72px 0 10px; }
-  h1 { margin: 0 0 18px; font-size: 34px; font-weight: 650; letter-spacing: -0.02em; line-height: 1.25; }
-  .intro p { margin: 0 0 16px; color: var(--dim); max-width: 62ch; }
-  .intro p.lead { color: var(--ink); font-size: 19px; }
   code {
     background: var(--panel); border: 1px solid var(--rule);
     padding: 1px 6px; border-radius: 4px; font-size: 0.86em; color: var(--ink);
     font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
   }
 
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .rise {
+    opacity: 0;
+    animation: rise .4s cubic-bezier(.22, .68, .36, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 45ms);
+  }
+
+  /* intro */
+  .intro { padding: 64px 0 8px; }
+  .kicker {
+    margin: 0 0 10px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600;
+  }
+  h1 { margin: 0 0 16px; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+  .intro p { margin: 0 0 14px; color: var(--dim); max-width: 62ch; }
+  .intro p.lead { color: var(--ink); font-size: 18px; }
+
+  .install {
+    display: grid; grid-template-columns: auto 1fr; gap: 6px 16px;
+    margin: 22px 0 0; padding: 16px 18px;
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 8px;
+    font-size: 15px; color: var(--dim);
+  }
+  .install b { color: var(--ink); font-weight: 600; }
+
   /* search row */
   .bar {
+    position: sticky; top: 0; z-index: 2;
     display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center;
-    padding: 26px 0 6px; margin-top: 26px; border-top: 1px solid var(--rule);
+    padding: 14px 0; margin-top: 34px;
+    background: var(--bg); border-bottom: 1px solid var(--rule);
   }
   #q {
     flex: 1 1 200px; min-width: 0;
-    background: transparent; border: 0; border-bottom: 1px solid var(--rule);
-    color: var(--ink); font: inherit; font-size: 16px; padding: 6px 2px;
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 6px;
+    color: var(--ink); font: inherit; font-size: 15px; padding: 7px 11px;
+    transition: border-color .15s ease;
   }
   #q::placeholder { color: var(--faint); }
-  #q:focus { outline: 0; border-bottom-color: var(--accent); }
-  .filters { display: flex; gap: 14px; font-size: 15px; }
+  #q:focus { outline: 0; border-color: var(--accent); }
+  .filters { display: flex; gap: 4px; font-size: 14px; }
   .chip {
-    background: 0; border: 0; padding: 4px 0; cursor: pointer;
-    color: var(--faint); font: inherit;
-    border-bottom: 1px solid transparent;
-    transition: color .15s ease, border-color .2s ease;
+    background: 0; border: 1px solid transparent; border-radius: 6px;
+    padding: 5px 11px; cursor: pointer; color: var(--faint); font: inherit;
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
   }
   .chip:hover { color: var(--dim); }
-  .chip[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--accent); }
-  #q { transition: border-color .2s ease; }
+  .chip[aria-pressed="true"] { color: var(--ink); border-color: var(--rule); background: var(--panel); }
+  .count { color: var(--faint); font-size: 14px; }
 
-  /* section headings */
-  .sec { margin-top: 46px; }
-  .sec-head { padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
-  .sec-head h2 {
-    margin: 0; font-size: 14px; font-weight: 600;
-    letter-spacing: 0.11em; text-transform: uppercase; color: var(--accent);
+  /* mod list */
+  #list { padding: 18px 0 0; }
+  .mod {
+    margin: 0 0 12px;
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 10px;
+    transition: border-color .15s ease;
   }
-  .sec-head p { margin: 10px 0 0; color: var(--dim); font-size: 16px; max-width: 62ch; }
+  .mod:hover { border-color: #313840; }
+  .mod-head { display: flex; align-items: center; gap: 16px; padding: 18px 20px; }
+  .mod-id { flex: 1 1 auto; min-width: 0; }
+  .mod h2 { margin: 0; font-size: 20px; font-weight: 650; letter-spacing: -0.01em; line-height: 1.3; }
+  .mod .what { margin: 2px 0 0; color: var(--dim); font-size: 15px; }
+  .meta { margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 6px; font-size: 12.5px; }
+  .tag {
+    padding: 1px 8px; border-radius: 999px; border: 1px solid var(--rule);
+    color: var(--faint); white-space: nowrap;
+  }
+  .tag.spt { color: var(--dim); }
+  .tag.old { color: var(--warn); border-color: #4a3d22; }
+  .tag.bad { color: var(--warn); border-color: #4a3d22; }
 
-  /* mods */
-  .mod { padding: 36px 0; border-top: 1px solid var(--rule); }
-  .mod:first-child { border-top: 0; }
-  .mod-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px 12px; }
-  .mod h3 { margin: 0; font-size: 24px; font-weight: 650; letter-spacing: -0.015em; }
-  .mod .what { color: var(--dim); font-size: 17px; }
-  .mod .v { margin-left: auto; color: var(--faint); font-size: 14px; white-space: nowrap; }
-  .mod .by { color: var(--faint); font-size: 15px; }
+  .dl {
+    flex: 0 0 auto;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px; border-radius: 7px;
+    background: var(--accent); color: #17130c; font-weight: 650; font-size: 15px;
+    text-decoration: none; white-space: nowrap;
+    transition: background .15s ease, transform .1s ease;
+  }
+  .dl:hover { background: var(--accent-hi); color: #17130c; }
+  .dl:active { transform: translateY(1px); }
+  .dl svg { width: 16px; height: 16px; }
+  .dl.none {
+    background: transparent; color: var(--faint); border: 1px dashed var(--rule);
+    font-weight: 500; cursor: default;
+  }
 
-  .mod p.desc { margin: 14px 0 0; max-width: 64ch; }
-  .mod ul { margin: 14px 0 0; padding-left: 22px; color: var(--dim); max-width: 62ch; }
-  .mod li { margin: 5px 0; padding-left: 2px; }
-  .mod li::marker { color: var(--faint); }
-  .mod .needs { margin: 14px 0 0; font-size: 16px; color: var(--dim); }
-  .mod .needs b { color: var(--ink); font-weight: 600; }
+  details { border-top: 1px solid var(--rule); }
+  summary {
+    list-style: none; cursor: pointer; user-select: none;
+    padding: 9px 20px; font-size: 14px; color: var(--faint);
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before {
+    content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 10px 2px 0;
+    border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+    transform: rotate(-45deg); transition: transform .15s ease;
+  }
+  details[open] summary::before { transform: rotate(45deg); }
+  summary:hover { color: var(--dim); }
+  .body { padding: 2px 20px 20px; }
+  .body p { margin: 0 0 12px; max-width: 64ch; }
+  .body ul { margin: 0 0 12px; padding-left: 22px; color: var(--dim); max-width: 62ch; }
+  .body li { margin: 4px 0; }
+  .body li::marker { color: var(--faint); }
+  .needs { font-size: 15px; color: var(--dim); }
+  .needs b { color: var(--ink); font-weight: 600; }
+  .links { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 15px; }
 
   .flag {
-    margin: 16px 0 0; padding: 12px 15px; font-size: 16px; max-width: 64ch;
-    border-left: 3px solid #97742d; background: #1e1a11; color: #e3c07e;
-    border-radius: 0 5px 5px 0;
+    margin: 0 20px 16px; padding: 10px 14px; font-size: 15px;
+    border-left: 3px solid #97742d; background: #1e1a11; color: var(--warn);
+    border-radius: 0 6px 6px 0;
   }
   .flag b { color: #f5cf85; }
-  /* "not out yet" is not a problem, so it should not look like one */
-  .flag.info {
-    border-left-color: #3c464f; background: #171b1f; color: var(--dim);
-  }
+  .flag.info { border-left-color: #3c464f; background: #171b1f; color: var(--dim); }
   .flag.info b { color: var(--ink); }
-
-  .links { margin-top: 18px; display: flex; gap: 20px; align-items: center; font-size: 16px; }
-  .links .soon { color: var(--faint); }
-  .links a::after {
-    content: " \2192";
-    display: inline-block;
-    transition: transform .18s ease;
-  }
-  .links a:hover::after { transform: translateX(3px); }
-
-  /* empty archive */
-  .waiting {
-    margin: 24px 0 0; padding: 26px 24px;
-    border: 1px dashed var(--rule); border-radius: 8px;
-    color: var(--dim);
-  }
-  .waiting p { margin: 0 0 14px; max-width: 62ch; }
-  .waiting p:last-child { margin-bottom: 0; }
-
-  /* takedown */
-  .policy {
-    margin: 46px 0 0; padding: 30px 28px;
-    background: var(--panel); border: 1px solid var(--rule); border-radius: 8px;
-  }
-  .policy h2 { margin: 0 0 16px; font-size: 22px; font-weight: 650; letter-spacing: -0.01em; }
-  .policy p { margin: 0 0 16px; color: var(--dim); max-width: 62ch; }
-  .policy p:last-child { margin-bottom: 0; }
-  .policy strong { color: var(--ink); font-weight: 600; }
-
-  footer { padding: 44px 0 80px; color: var(--faint); font-size: 15px; }
-  footer p { margin: 0 0 7px; }
 
   .none { color: var(--faint); padding: 30px 0; }
 
-  @media (max-width: 520px) {
-    body { font-size: 17px; }
-    .intro { padding-top: 48px; }
-    h1 { font-size: 28px; }
-    .mod .v { margin-left: 0; width: 100%; }
-    .policy, .waiting { padding: 24px 20px; }
+  footer { padding: 40px 0 80px; color: var(--faint); font-size: 14px; }
+  footer p { margin: 0 0 6px; }
+
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .intro { padding-top: 44px; }
+    h1 { font-size: 29px; }
+    .wrap { padding: 0 16px; }
+    .mod-head { flex-direction: column; align-items: stretch; gap: 14px; padding: 16px; }
+    .dl { justify-content: center; }
+    summary { padding: 9px 16px; }
+    .body { padding: 2px 16px 18px; }
+    .flag { margin: 0 16px 14px; }
+    .install { grid-template-columns: 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -163,70 +188,34 @@
 <main class="wrap">
 
   <section class="intro">
-    <h1 class="rise" style="--i:0">20fpsguy's SPT mods</h1>
-    <p class="lead rise" style="--i:1">
-      Mods I've made for SPT, plus an archive of older mods I've ported forward so they
-      don't disappear. Everything here is built and tested against SPT 4.1.
+    <p class="kicker rise" style="--i:0">SPT mods by 20fpsguy</p>
+    <h1 class="rise" style="--i:1">Every mod I've made, one click away</h1>
+    <p class="lead rise" style="--i:2">
+      Direct downloads for all my SPT mods, straight from GitHub releases. No account,
+      no redirects. If you can't find my stuff anywhere else, it's always here.
     </p>
-    <p class="rise" style="--i:2">
-      Client plugins go in <code>BepInEx/plugins</code>, server mods go in
-      <code>SPT_Runtime/user/mods</code>. Sources on
-      <a href="https://github.com/20fpsguys-SPT-Mod-Archive">GitHub</a>.
-    </p>
+    <div class="install rise" style="--i:3">
+      <b>Client</b><span>extract into your SPT folder, plugins land in <code>BepInEx/plugins</code></span>
+      <b>Server</b><span>goes in <code>SPT_Runtime/user/mods</code></span>
+    </div>
   </section>
 
-  <div class="bar rise" style="--i:3">
-    <input type="search" id="q" placeholder="Filter..." aria-label="Filter mods">
+  <div class="bar rise" style="--i:4">
+    <input type="search" id="q" placeholder="Search mods..." aria-label="Search mods">
     <div class="filters" id="filters">
-      <button class="chip" data-f="all" aria-pressed="true">all</button>
-      <button class="chip" data-f="client" aria-pressed="false">client</button>
-      <button class="chip" data-f="server" aria-pressed="false">server</button>
+      <button class="chip" data-f="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="client" aria-pressed="false">Client</button>
+      <button class="chip" data-f="server" aria-pressed="false">Server</button>
     </div>
+    <span class="count" id="count"></span>
   </div>
 
-  <section class="sec" id="sec-mine">
-    <div class="sec-head">
-      <h2>My mods</h2>
-      <p>Stuff I wrote. All MIT, do what you like with it.</p>
-    </div>
-    <div id="list-mine"></div>
-  </section>
-
-  <section class="sec" id="sec-archive">
-    <div class="sec-head">
-      <h2>Archive</h2>
-      <p>
-        Mods that never got updated to 4.1 and have been abandoned by their authors. I
-        port them forward so they still work. Credit stays with whoever wrote them.
-      </p>
-    </div>
-    <div id="list-archive"></div>
-  </section>
-
-  <section class="policy" id="takedown">
-    <h2>Is a mod of yours listed here?</h2>
-    <p>
-      The only reason any of this is up is to keep these mods alive and available. SPT is
-      shutting down, mods get taken offline, authors move on, and once a mod is gone it's
-      gone for good. I'd rather people could still play with the stuff everyone spent
-      years building.
-    </p>
-    <p>
-      But it's your work. If you own a mod listed here and you want it taken down,
-      <strong><a href="https://github.com/20fpsguys-SPT-Mod-Archive/website/issues/new?labels=takedown&amp;template=takedown.yml">open a complaint here</a></strong>
-      and I'll remove it as soon as I can. That's your right and I'm not going to argue
-      about it or ask you to justify anything.
-    </p>
-    <p>
-      Same if you just want something changed instead: credit fixed, description
-      corrected, a link pointed at your page rather than mine. Prefer to keep it off a
-      public issue? Say so in it and I'll follow up privately.
-    </p>
-  </section>
+  <div id="list"></div>
 
 </main>
 
 <footer class="wrap">
+  <p>Source for everything is on <a href="https://github.com/diemitze">GitHub</a>. All MIT unless the repo says otherwise.</p>
   <p>Not affiliated with Battlestate Games or the SPT team.</p>
 </footer>
 
@@ -235,12 +224,15 @@
 (function () {
   var mods = window.MODS || [];
   var q = document.getElementById('q');
+  var list = document.getElementById('list');
+  var count = document.getElementById('count');
   var filter = 'all';
 
-  var groups = [
-    { key: 'mine',    list: document.getElementById('list-mine'),    sec: document.getElementById('sec-mine') },
-    { key: 'archive', list: document.getElementById('list-archive'), sec: document.getElementById('sec-archive') }
-  ];
+  var ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M8 2v8M4.5 6.8 8 10.3l3.5-3.5M3 13.5h10"/></svg>';
+
+  var LABELS = { issue: 'Semi broken.', wip: 'Work in progress.', pending: 'Heads up.' };
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
@@ -251,8 +243,21 @@
   function row(m) {
     var el = document.createElement('article');
     el.className = 'mod';
+    el.id = m.id;
 
-    var by = m.author ? '<span class="by">by ' + esc(m.author) + '</span>' : '';
+    var tags = '<span class="tag spt mono">v' + esc(m.version) + '</span>' +
+      '<span class="tag' + (m.spt === '4.1' ? '' : ' old') + '">SPT ' + esc(m.spt) + '</span>' +
+      m.side.map(function (s) { return '<span class="tag">' + esc(s) + '</span>'; }).join('') +
+      (m.status === 'issue' ? '<span class="tag bad">semi broken</span>' : '');
+
+    var dl = m.download
+      ? '<a class="dl" href="' + esc(m.download) + '">' + ICON + 'Download</a>'
+      : '<span class="dl none">No build yet</span>';
+
+    var flag = m.statusNote
+      ? '<p class="flag' + (m.status === 'pending' ? ' info' : '') + '"><b>' +
+        (LABELS[m.status] || 'Heads up.') + '</b> ' + esc(m.statusNote) + '</p>'
+      : '';
 
     var feats = (m.features && m.features.length)
       ? '<ul>' + m.features.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul>'
@@ -264,33 +269,24 @@
         }).join(' and ') + '</p>'
       : '';
 
-    var LABELS = {
-      issue:   'Semi broken.',
-      wip:     'Work in progress.',
-      pending: 'Not released yet.'
-    };
-    var flag = m.statusNote
-      ? '<p class="flag' + (m.status === 'pending' ? ' info' : '') + '">' +
-        '<b>' + (LABELS[m.status] || 'Heads up.') + '</b> ' + esc(m.statusNote) + '</p>'
-      : '';
-
-    var links = [];
-    links.push(m.download
-      ? '<a href="' + esc(m.download) + '">Download</a>'
-      : '<span class="soon">No build up yet</span>');
+    var links = (m.extra || []).map(function (x) {
+      return '<a href="' + esc(x.url) + '">' + esc(x.label) + '</a>';
+    });
     if (m.source) links.push('<a href="' + esc(m.source) + '">Source</a>');
-    if (m.original) links.push('<a href="' + esc(m.original) + '">Original</a>');
+    if (m.source && m.download) links.push('<a href="' + esc(m.source) + '/releases">All versions</a>');
 
     el.innerHTML =
-      '<div class="mod-top">' +
-        '<h3>' + esc(m.name) + '</h3>' +
-        '<span class="what">' + esc(m.tagline) + '</span>' +
-        '<span class="v mono">' + esc(m.version) + ' &middot; ' + m.side.join(' + ') + '</span>' +
-      '</div>' +
-      (by ? '<p class="needs">' + by + '</p>' : '') +
-      '<p class="desc">' + esc(m.blurb) + '</p>' +
-      feats + needs + flag +
-      '<div class="links">' + links.join('') + '</div>';
+      '<div class="mod-head">' +
+        '<div class="mod-id">' +
+          '<h2>' + esc(m.name) + '</h2>' +
+          '<p class="what">' + esc(m.tagline) + '</p>' +
+          '<div class="meta">' + tags + '</div>' +
+        '</div>' + dl +
+      '</div>' + flag +
+      '<details><summary>Details</summary><div class="body">' +
+        '<p>' + esc(m.blurb) + '</p>' + feats + needs +
+        (links.length ? '<div class="links">' + links.join('') + '</div>' : '') +
+      '</div></details>';
 
     return el;
   }
@@ -299,59 +295,25 @@
     if (filter !== 'all' && m.side.indexOf(filter) === -1) return false;
     var t = q.value.trim().toLowerCase();
     if (!t) return true;
-    return [m.name, m.tagline, m.blurb, m.author || '']
-      .concat(m.features || []).join(' ').toLowerCase().indexOf(t) !== -1;
+    return [m.name, m.tagline, m.blurb].concat(m.features || []).join(' ').toLowerCase().indexOf(t) !== -1;
   }
 
   function render(animate) {
-    var searching = q.value.trim() !== '' || filter !== 'all';
-    var n = 0;
-
-    groups.forEach(function (g) {
-      var all = mods.filter(function (m) { return (m.group || 'mine') === g.key; });
-      var shown = all.filter(matches);
-      g.list.innerHTML = '';
-
-      if (shown.length) {
-        shown.forEach(function (m) {
-          var el = row(m);
-          if (animate) {
-            el.classList.add('rise');
-            el.style.setProperty('--i', n++);
-          }
-          g.list.appendChild(el);
-        });
-        g.sec.hidden = false;
-        return;
+    var shown = mods.filter(matches);
+    list.innerHTML = '';
+    shown.forEach(function (m, n) {
+      var el = row(m);
+      if (animate) {
+        el.classList.add('rise');
+        el.style.setProperty('--i', n);
       }
-
-      // nothing to show: hide the section while filtering, otherwise explain why
-      if (searching) {
-        g.sec.hidden = true;
-        return;
-      }
-      g.sec.hidden = false;
-      g.list.innerHTML = g.key === 'archive'
-        ? '<div class="waiting">' +
-            '<p>Nothing here yet. This is where mods end up that never got updated to ' +
-            '4.1 and have been abandoned, either because the author stopped modding or ' +
-            'took the mod down.</p>' +
-            '<p>I wait a few weeks before adding anything, in case the author comes ' +
-            'back to it.</p>' +
-          '</div>'
-        : '<p class="none">Nothing here yet.</p>';
+      list.appendChild(el);
     });
-
-    var anyShown = groups.some(function (g) { return !g.sec.hidden; });
-    if (!anyShown) {
-      groups[0].sec.hidden = false;
-      groups[0].list.innerHTML = '<p class="none">Nothing matches that.</p>';
-    }
+    if (!shown.length) list.innerHTML = '<p class="none">Nothing matches that.</p>';
+    count.textContent = shown.length + (shown.length === 1 ? ' mod' : ' mods');
   }
 
-  // typing re-renders without animating, otherwise the list flickers per keystroke
-  // Never let content stay hidden behind an animation that did not run (background tab,
-  // animations disabled, older browser). Dropping .rise restores the default opacity.
+  // Never leave content hidden behind an animation that did not run (background tab etc).
   function settle() {
     Array.prototype.forEach.call(document.querySelectorAll('.rise'), function (el) {
       el.classList.remove('rise');
@@ -370,6 +332,7 @@
     }
   });
 
+  // typing re-renders without animating, otherwise the list flickers per keystroke
   q.addEventListener('input', function () { render(false); });
 
   document.getElementById('filters').addEventListener('click', function (e) {
@@ -385,6 +348,16 @@
 
   render(true);
   scheduleSettle();
+
+  // #mod-id links open that mod's details
+  if (location.hash) {
+    var target = document.getElementById(location.hash.slice(1));
+    if (target) {
+      var d = target.querySelector('details');
+      if (d) d.open = true;
+      target.scrollIntoView();
+    }
+  }
 })();
 </script>
 

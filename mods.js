@@ -1,37 +1,35 @@
 // The catalogue. Add a mod = add an object. No build step.
 //
 //   download: release asset URL, or null for "not up yet"
+//   extra:    more download links, [{ label, url }]
 //   side:     "client" / "server", drives the filter
-//   status:   "ok" | "issue" | "wip"
+//   status:   "ok" | "issue" | "wip" | "pending"
 window.MODS = [
   {
-    id: "parmesan",
-    group: "mine",
-    name: "Parmesan",
-    tagline: "Partizan rework",
+    id: "backpack-gun-slot",
+    name: "Backpack Gun Slot",
+    tagline: "Strap a gun to your backpack",
     version: "1.0.1",
     spt: "4.1",
-    side: ["client"],
-    status: "pending",
-    statusNote:
-      "Ported to 4.1 and building fine, I just have not put the release up yet.",
+    side: ["client", "server"],
+    status: "ok",
     blurb:
-      "Partizan is hardcoded to hunt you. He knows where you are at all times and comes for you every raid, wherever you spawn. This points him at the AI PMCs instead, so he roams and picks fights with them. He'll still shoot you if he actually sees you.",
+      "Every backpack gets an ON PACK weapon slot that carries a gun without eating grid space. The bigger the pack, the bigger the gun it takes.",
     features: [
-      "Targets a random living AI PMC instead of you, scavs left alone",
-      "No more wallhack tracking, he uses normal sight and sound",
-      "Optional: roams faster, and plants the grenades he already carries"
+      "Size tiers: sling bags take pistols, raid packs take rifles",
+      "The slot shape and outline show what fits, hover it for the full list",
+      "Your own tiers, per-backpack overrides, or let every pack take anything",
+      "Works with Fika and headless"
     ],
     requires: [],
-    download: null,
-    source: null
+    download: "https://github.com/diemitze/BackpackGunSlot/releases/download/1.0.1/BackpackGunSlot-1.0.1.zip",
+    source: "https://github.com/diemitze/BackpackGunSlot"
   },
   {
     id: "lootnet",
-    group: "mine",
     name: "LootNET",
     tagline: "What did I actually make that raid",
-    version: "1.1.0",
+    version: "1.2.0",
     spt: "4.1",
     side: ["client", "server"],
     status: "ok",
@@ -43,20 +41,17 @@ window.MODS = [
       "Flea prices, falls back to handbook when flea has nothing"
     ],
     requires: [],
-    download: "https://github.com/diemitze/LootNet/releases/download/1.1.0/LootNet.zip",
+    download: "https://github.com/diemitze/LootNet/releases/download/1.2.0/LootNet.zip",
     source: "https://github.com/diemitze/LootNet"
   },
   {
     id: "weekend-drops",
-    group: "mine",
     name: "Weekend Drops",
     tagline: "Challenges and crates on a weekly cycle",
-    version: "1.0.4",
+    version: "1.0.7",
     spt: "4.1",
     side: ["client", "server"],
-    status: "pending",
-    statusNote:
-      "4.1 build is done but not released. The contract hold-zone brain needs BigBrain, which has no 4.1 build yet, so that part stays off until it does.",
+    status: "ok",
     blurb:
       "A new set of challenges every weekend. Finish them to fill three reward tiers and get crates mailed to you. Dailies pay GP coins, which you spend in a shop for cases and Arena crates.",
     features: [
@@ -66,19 +61,17 @@ window.MODS = [
       "Kills still count if you die, but banked survival time resets to zero"
     ],
     requires: [],
-    download: null,
-    source: null
+    download: "https://github.com/diemitze/WeekendDrops/releases/download/1.0.7/WeekendDrops-1.0.7.zip",
+    source: "https://github.com/diemitze/WeekendDrops"
   },
   {
     id: "resound",
-    group: "mine",
     name: "Resound",
     tagline: "Different gun sounds",
-    version: "1.1.1",
+    version: "1.2.0",
     spt: "4.1",
     side: ["client"],
-    status: "pending",
-    statusNote: "Ported to 4.1, release is not up yet.",
+    status: "ok",
     blurb:
       "Swaps weapon fire audio. Ships with Black Ops II for most guns and CS2 for the Deagles, but it just reads WAVs out of folders, so you can build your own pack for anything.",
     features: [
@@ -87,28 +80,65 @@ window.MODS = [
       "Anything a pack doesn't cover stays vanilla"
     ],
     requires: [],
-    download: null,
-    source: null
+    download: "https://github.com/diemitze/resound/releases/download/1.2.0/Resound.zip",
+    source: "https://github.com/diemitze/resound"
+  },
+  {
+    id: "mia-lounge",
+    name: "MIA Lounge",
+    tagline: "Minigames for when you're dead",
+    version: "1.0.0",
+    spt: "4.1",
+    side: ["server"],
+    status: "ok",
+    blurb:
+      "A small arcade on your SPT server. Open a page in a browser while your friend finishes the raid, pick your profile and play against a bot or whoever else is dead. Winnings are paid out as XP and roubles through in-game mail.",
+    features: [
+      "Server only, nobody else installs anything",
+      "Works from a second monitor, a phone or an alt-tab"
+    ],
+    requires: [],
+    download: "https://github.com/diemitze/MIA-Lounge/releases/download/1.0.0/MIA-Lounge-1.0.0-SPT-4.1.zip",
+    extra: [
+      { label: "SPT 4.0 build", url: "https://github.com/diemitze/MIA-Lounge/releases/download/1.0.0/MIA-Lounge-1.0.0-SPT-4.0.zip" }
+    ],
+    source: "https://github.com/diemitze/MIA-Lounge"
   },
   {
     id: "female-pmc-voice",
-    group: "mine",
     name: "Female PMC Voice",
     tagline: "Extra voice option",
-    version: "1.0.3",
+    version: "1.0.5",
     spt: "4.1",
     side: ["server"],
-    status: "pending",
-    statusNote: "Ported to 4.1, release is not up yet.",
+    status: "ok",
     blurb: "Adds a female PMC voice with a full line set.",
     features: [],
     requires: [{ name: "WTT CommonLib", detail: "3.x, server mod and client plugin" }],
-    download: null,
-    source: null
+    download: "https://github.com/diemitze/female-pmc-voice-USEC/releases/download/1.0.5/FemalePMCVoice_v1.0.5.zip",
+    source: "https://github.com/diemitze/female-pmc-voice-USEC"
+  },
+  {
+    id: "parmesan",
+    name: "Parmesan",
+    tagline: "Partizan rework",
+    version: "1.0.1",
+    spt: "4.1",
+    side: ["client"],
+    status: "ok",
+    blurb:
+      "Partizan is hardcoded to hunt you. He knows where you are at all times and comes for you every raid, wherever you spawn. This points him at the AI PMCs instead, so he roams and picks fights with them. He'll still shoot you if he actually sees you.",
+    features: [
+      "Targets a random living AI PMC instead of you, scavs left alone",
+      "No more wallhack tracking, he uses normal sight and sound",
+      "Optional: roams faster, and plants the grenades he already carries"
+    ],
+    requires: [],
+    download: "https://github.com/diemitze/Parmesan---Partizan-Rework/releases/download/1.0.1/Parmesan.zip",
+    source: "https://github.com/diemitze/Parmesan---Partizan-Rework"
   },
   {
     id: "knife-sprint",
-    group: "mine",
     name: "Knife Sprint",
     tagline: "Run faster with a knife out",
     version: "1.0.1",
@@ -123,8 +153,38 @@ window.MODS = [
     source: "https://github.com/diemitze/knife-sprint"
   },
   {
+    id: "breakout-outlines",
+    name: "Breakout Outlines",
+    tagline: "Arena Breakout style loot outlines",
+    version: "1.0.0",
+    spt: "4.0",
+    side: ["client"],
+    status: "pending",
+    statusNote: "The build here is the original 1.0.0 from before 4.1.",
+    blurb:
+      "Draws Arena Breakout Infinite style outlines around containers, loose loot and bodies so they're easier to spot. Made together with harmony.",
+    features: [],
+    requires: [],
+    download: "https://github.com/diemitze/loot-outline/releases/download/1.0.0/LootOutline.zip",
+    source: "https://github.com/diemitze/loot-outline"
+  },
+  {
+    id: "sixth-sense-isac",
+    name: "Sixth Sense ISAC",
+    tagline: "Sound swap addon",
+    version: "1.0.0",
+    spt: "4.1",
+    side: ["client"],
+    status: "ok",
+    blurb:
+      "Replaces the default Sixth Sense sound with the ISAC rogue agent voice line from The Division.",
+    features: [],
+    requires: [{ name: "Sixth Sense" }],
+    download: "https://github.com/diemitze/Sixth-Sense-addon/releases/download/1.0.0/BepInEx.7z",
+    source: "https://github.com/diemitze/Sixth-Sense-addon"
+  },
+  {
     id: "quick-loot",
-    group: "mine",
     name: "Quick Loot",
     tagline: "Grabs the stuff you care about",
     version: "1.0.7",
@@ -132,7 +192,7 @@ window.MODS = [
     side: ["client", "server"],
     status: "issue",
     statusNote:
-      "Semi broken on 4.1. It loads and all the config is there, but auto-search and quick-loot do not actually fire. Needs some work before it is worth downloading.",
+      "Semi broken on 4.1. It loads and all the config is there, but auto-search and quick-loot do not actually fire. No download until that's fixed.",
     blurb:
       "Opens containers and pulls out what matches your rules, so you're not clicking through every crate.",
     features: [
